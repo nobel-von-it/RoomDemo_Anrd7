@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
 class MainViewModel(application: Application) : ViewModel() {
 
@@ -30,5 +31,12 @@ class MainViewModel(application: Application) : ViewModel() {
 
     fun deleteProduct(name: String) {
         repository.deleteProduct(name)
+    }
+}
+
+class MainViewModelFactory(val application: Application) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        @Suppress("UNCHECKED_CAST")
+        return MainViewModel(application) as T
     }
 }
